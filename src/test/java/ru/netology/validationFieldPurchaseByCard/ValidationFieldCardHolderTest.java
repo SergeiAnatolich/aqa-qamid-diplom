@@ -1,4 +1,4 @@
-package ru.netology.validationFieldTest;
+package ru.netology.validationFieldPurchaseByCard;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -76,5 +76,12 @@ public class ValidationFieldCardHolderTest {
         Page.fieldCardHolder.setValue("!@#$%^&*()_+/-,. `~");
         String actualContentsField = Page.fieldCardHolder.getValue();
         assertEquals("", actualContentsField);
+    }
+
+    @Test
+    public void shouldNotEnterMore27LettersLatinInFieldCardHolder() {
+        Page.fieldCardHolder.setValue("anna-mariya ivanova-sidorova");
+        String actualContentsField = Page.fieldCardHolder.getValue();
+        assertEquals("anna-mariya ivanova-sidorov", actualContentsField);
     }
 }

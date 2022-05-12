@@ -1,4 +1,4 @@
-package ru.netology.validationFieldTest;
+package ru.netology.validationFieldPurchaseByCard;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -11,7 +11,7 @@ import ru.netology.data.Page;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ValidationFieldYearTest {
+public class ValidationFieldMonthTest {
 
     @BeforeAll
     static void setUpAll() {
@@ -30,37 +30,37 @@ public class ValidationFieldYearTest {
     }
 
     @Test
-    public void shouldEnterNumbersInFieldYear() {
-        Page.fieldYear.setValue("24");
-        String actualContentsField = Page.fieldYear.getValue();
-        assertEquals("24", actualContentsField);
+    public void shouldEnterNumbersInFieldMonth() {
+        Page.fieldMonth.setValue("01");
+        String actualContentsField = Page.fieldMonth.getValue();
+        assertEquals("01", actualContentsField);
     }
 
     @Test
-    public void shouldNotEnterMore2NumbersInFieldYear() {
-        Page.fieldYear.setValue("123");
-        String actualContentsField = Page.fieldYear.getValue();
+    public void shouldNotEnterMore2NumbersInFieldMonth() {
+        Page.fieldMonth.setValue("123");
+        String actualContentsField = Page.fieldMonth.getValue();
         assertEquals("12", actualContentsField);
     }
 
     @Test
-    public void shouldNotEnterLettersLatinInFieldYear() {
-        Page.fieldYear.setValue("ya");
-        String actualContentsField = Page.fieldYear.getValue();
+    public void shouldNotEnterLettersLatinInFieldMonth() {
+        Page.fieldMonth.setValue("mo");
+        String actualContentsField = Page.fieldMonth.getValue();
         assertEquals("", actualContentsField);
     }
 
     @Test
-    public void shouldNotEnterLettersCyrillicInFieldYear() {
-        Page.fieldYear.setValue("го");
-        String actualContentsField = Page.fieldYear.getValue();
+    public void shouldNotEnterLettersCyrillicInFieldMonth() {
+        Page.fieldMonth.setValue("ар");
+        String actualContentsField = Page.fieldMonth.getValue();
         assertEquals("", actualContentsField);
     }
 
     @Test
-    public void shouldNotEnterSymbolsInFieldYear() {
-        Page.fieldYear.setValue("!@#$%^&*()_+/-,. `~");
-        String actualContentsField = Page.fieldYear.getValue();
+    public void shouldNotEnterSymbolsInFieldMonth() {
+        Page.fieldMonth.setValue("!@#$%^&*()_+/-,. `~");
+        String actualContentsField = Page.fieldMonth.getValue();
         assertEquals("", actualContentsField);
     }
 }

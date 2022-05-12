@@ -1,4 +1,4 @@
-package ru.netology.validationFieldTest;
+package ru.netology.validationFieldPurchaseByCredit;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -26,7 +26,7 @@ public class ValidationFieldMonthTest {
     @BeforeEach
     public void openBrowser() {
         open("http://localhost:8080/");
-        Page.buttonBuy.click();
+        Page.buttonBuyInCredit.click();
     }
 
     @Test

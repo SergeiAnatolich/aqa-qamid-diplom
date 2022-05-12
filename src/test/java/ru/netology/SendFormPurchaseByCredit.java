@@ -14,7 +14,7 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.open;
 
-public class SendForm {
+public class SendFormPurchaseByCredit {
 
     @BeforeAll
     static void setUpAll() {
@@ -27,9 +27,9 @@ public class SendForm {
     }
 
     @BeforeEach
-    public void openBrowser() {
+    public void openBrowserAndClickButtonBuyInCredit() {
         open("http://localhost:8080/");
-        Page.buttonBuy.click();
+        Page.buttonBuyInCredit.click();
     }
 
     @Test
@@ -46,32 +46,7 @@ public class SendForm {
     }
 
     @Test
-    public void shouldSuccessfullyBuyTourOnCreditWithRegisteredCard() {
-        Page.buttonBuyInCredit.click();
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCardForCredit().getNumberCard());
-        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCardForCredit().getMonthCard());
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredCardForCredit().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCardForCredit().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCardForCredit().getCvcCard());
-        Page.buttonNext.click();
-        Page.notificationTitleOk.should(appear, Duration.ofSeconds(15));
-        Page.notificationTitleOk.shouldBe(visible).shouldHave(text("Успешно"));
-        Page.notificationContentOk.shouldBe(visible).shouldHave(text("Операция одобрена Банком."));
-    }
-
-    @Test
-    public void shouldNotSendFormBuyTourOnCardWithAllFieldsEmpty() {
-        Page.buttonNext.click();
-        Page.invalidFormatFieldCardNumber.shouldBe(visible).shouldHave(text("Неверный формат"));
-        Page.invalidFormatFieldMonth.shouldBe(visible).shouldHave(text("Неверный формат"));
-        Page.invalidFormatFieldYear.shouldBe(visible).shouldHave(text("Неверный формат"));
-        Page.invalidFormatFieldCardHolder.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
-        Page.invalidFormatFieldCvC.shouldBe(visible).shouldHave(text("Неверный формат"));
-    }
-
-    @Test
-    public void shouldNotSendFormBuyTourOnCreditWithAllFieldsEmpty() {
-        Page.buttonBuyInCredit.click();
+    public void shouldNotSendFormWithAllFieldsEmpty() {
         Page.buttonNext.click();
         Page.invalidFormatFieldCardNumber.shouldBe(visible).shouldHave(text("Неверный формат"));
         Page.invalidFormatFieldMonth.shouldBe(visible).shouldHave(text("Неверный формат"));
@@ -94,21 +69,7 @@ public class SendForm {
     }
 
     @Test
-    public void shouldNotBuyTourOnCreditWithUnregisteredCard() {
-        Page.buttonBuyInCredit.click();
-        Page.fieldCardNumber.setValue(DataHelper.getValidUnregisteredCard().getNumberCard());
-        Page.fieldMonth.setValue(DataHelper.getValidUnregisteredCard().getMonthCard());
-        Page.fieldYear.setValue(DataHelper.getValidUnregisteredCard().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidUnregisteredCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidUnregisteredCard().getCvcCard());
-        Page.buttonNext.click();
-        Page.notificationTitleError.should(appear, Duration.ofSeconds(15));
-        Page.notificationTitleError.shouldBe(visible).shouldHave(text("Ошибка"));
-        Page.notificationContentError.shouldBe(visible).shouldHave(text("Ошибка! Банк отказал в проведении операции."));
-    }
-
-    @Test
-    public void shouldNotBuyTourOnCardWithInvalidAllField() {
+    public void shouldNotSendFormWithInvalidAllField() {
         Page.fieldCardNumber.setValue(DataHelper.getInvalidCard().getNumberCard());
         Page.fieldMonth.setValue(DataHelper.getInvalidCard().getMonthCard());
         Page.fieldYear.setValue(DataHelper.getInvalidCard().getYearCard());
@@ -123,7 +84,7 @@ public class SendForm {
     }
 
     @Test
-    public void shouldNotBuyTourWithInvalidCard() {
+    public void shouldNotSendFormWithInvalidCard() {
         Page.fieldCardNumber.setValue(DataHelper.getInvalidCard().getNumberCard());
         Page.fieldMonth.setValue(DataHelper.getValidRegisteredCard().getMonthCard());
         Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
@@ -134,7 +95,40 @@ public class SendForm {
     }
 
     @Test
-    public void shouldNotBuyTourWithMonth00() {
+    public void shouldNotSendFormWith1FigureFieldCard() {
+        Page.fieldCardNumber.setValue("1");
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCard().getMonthCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
+        Page.buttonNext.click();
+        Page.invalidFormatFieldCardNumber.shouldBe(visible).shouldHave(text("Неверный формат"));
+    }
+
+    @Test
+    public void shouldNotSendFormTourWith15FigureFieldCard() {
+        Page.fieldCardNumber.setValue("012345678912345");
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCard().getMonthCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
+        Page.buttonNext.click();
+        Page.invalidFormatFieldCardNumber.shouldBe(visible).shouldHave(text("Неверный формат"));
+    }
+
+    @Test
+    public void shouldNotSendFormWithOneFigureFieldMonth() {
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
+        Page.fieldMonth.setValue("2");
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
+        Page.buttonNext.click();
+        Page.invalidFormatFieldMonth.shouldBe(visible).shouldHave(text("Неверный формат"));
+    }
+
+    @Test
+    public void shouldNotSendFormWithMonth00() {
         Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
         Page.fieldMonth.setValue("00");
         Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
@@ -145,9 +139,61 @@ public class SendForm {
     }
 
     @Test
-    public void shouldNotBuyTourWithMonthMore12() {
+    public void shouldBuyTourWithMonth01() {
         Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
-        Page.fieldMonth.setValue(DataHelper.getInvalidCard().getMonthCard());
+        Page.fieldMonth.setValue("01");
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
+        Page.buttonNext.click();
+        Page.notificationTitleOk.should(appear, Duration.ofSeconds(15));
+        Page.notificationTitleOk.shouldBe(visible).shouldHave(text("Успешно"));
+        Page.notificationContentOk.shouldBe(visible).shouldHave(text("Операция одобрена Банком."));
+    }
+
+    @Test
+    public void shouldBuyTourWithMonth02() {
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
+        Page.fieldMonth.setValue("02");
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
+        Page.buttonNext.click();
+        Page.notificationTitleOk.should(appear, Duration.ofSeconds(15));
+        Page.notificationTitleOk.shouldBe(visible).shouldHave(text("Успешно"));
+        Page.notificationContentOk.shouldBe(visible).shouldHave(text("Операция одобрена Банком."));
+    }
+
+    @Test
+    public void shouldBuyTourWithMonth11() {
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
+        Page.fieldMonth.setValue("11");
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
+        Page.buttonNext.click();
+        Page.notificationTitleOk.should(appear, Duration.ofSeconds(15));
+        Page.notificationTitleOk.shouldBe(visible).shouldHave(text("Успешно"));
+        Page.notificationContentOk.shouldBe(visible).shouldHave(text("Операция одобрена Банком."));
+    }
+
+    @Test
+    public void shouldBuyTourWithMonth12() {
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
+        Page.fieldMonth.setValue("12");
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
+        Page.buttonNext.click();
+        Page.notificationTitleOk.should(appear, Duration.ofSeconds(15));
+        Page.notificationTitleOk.shouldBe(visible).shouldHave(text("Успешно"));
+        Page.notificationContentOk.shouldBe(visible).shouldHave(text("Операция одобрена Банком."));
+    }
+
+    @Test
+    public void shouldNotSendFormWithMonth13() {
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
+        Page.fieldMonth.setValue("13");
         Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
         Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
         Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
@@ -156,10 +202,10 @@ public class SendForm {
     }
 
     @Test
-    public void shouldNotBuyTourWithYearLessCurrent() {
+    public void shouldNotSendFormWithYearLessCurrentBy1() {
         Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
         Page.fieldMonth.setValue(DataHelper.getValidRegisteredCard().getMonthCard());
-        Page.fieldYear.setValue("20");
+        Page.fieldYear.setValue("21");
         Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
         Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
         Page.buttonNext.click();
@@ -167,7 +213,59 @@ public class SendForm {
     }
 
     @Test
-    public void shouldNotBuyTourWithYearMoreCurrentBy6() {
+    public void shouldBuyTourWithYearCurrent() {
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCard().getMonthCard());
+        Page.fieldYear.setValue("23");
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
+        Page.buttonNext.click();
+        Page.notificationTitleOk.should(appear, Duration.ofSeconds(15));
+        Page.notificationTitleOk.shouldBe(visible).shouldHave(text("Успешно"));
+        Page.notificationContentOk.shouldBe(visible).shouldHave(text("Операция одобрена Банком."));
+    }
+
+    @Test
+    public void shouldBuyTourWithYearMoreCurrentBy1() {
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCard().getMonthCard());
+        Page.fieldYear.setValue("23");
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
+        Page.buttonNext.click();
+        Page.notificationTitleOk.should(appear, Duration.ofSeconds(15));
+        Page.notificationTitleOk.shouldBe(visible).shouldHave(text("Успешно"));
+        Page.notificationContentOk.shouldBe(visible).shouldHave(text("Операция одобрена Банком."));
+    }
+
+    @Test
+    public void shouldBuyTourWithYearMoreCurrentBy4() {
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCard().getMonthCard());
+        Page.fieldYear.setValue("26");
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
+        Page.buttonNext.click();
+        Page.notificationTitleOk.should(appear, Duration.ofSeconds(15));
+        Page.notificationTitleOk.shouldBe(visible).shouldHave(text("Успешно"));
+        Page.notificationContentOk.shouldBe(visible).shouldHave(text("Операция одобрена Банком."));
+    }
+
+    @Test
+    public void shouldBuyTourWithYearMoreCurrentBy5() {
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCard().getMonthCard());
+        Page.fieldYear.setValue("27");
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
+        Page.buttonNext.click();
+        Page.notificationTitleOk.should(appear, Duration.ofSeconds(15));
+        Page.notificationTitleOk.shouldBe(visible).shouldHave(text("Успешно"));
+        Page.notificationContentOk.shouldBe(visible).shouldHave(text("Операция одобрена Банком."));
+    }
+
+    @Test
+    public void shouldNotSendFormWithYearMoreCurrentBy6() {
         Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
         Page.fieldMonth.setValue(DataHelper.getValidRegisteredCard().getMonthCard());
         Page.fieldYear.setValue("28");
@@ -178,7 +276,7 @@ public class SendForm {
     }
 
     @Test
-    public void shouldNotBuyTourWithInvalidCardHolder() {
+    public void shouldNotSendFormWithInvalidCardHolder() {
         Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
         Page.fieldMonth.setValue(DataHelper.getValidRegisteredCard().getMonthCard());
         Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
@@ -189,18 +287,29 @@ public class SendForm {
     }
 
     @Test
-    public void shouldNotBuyTourWithInvalidCvC() {
+    public void shouldNotSendFormWithOneFigureFieldCvC() {
         Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
         Page.fieldMonth.setValue(DataHelper.getValidRegisteredCard().getMonthCard());
         Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
         Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getInvalidCard().getCvcCard());
+        Page.fieldCvC.setValue("5");
         Page.buttonNext.click();
         Page.invalidFormatFieldCvC.shouldBe(visible).shouldBe(visible).shouldHave(text("Неверный формат"));
     }
 
     @Test
-    public void shouldNotSendFormBuyTourOnCardWithFieldCardEmpty() {
+    public void shouldNotSendFormWithTwoFigureFieldCvC() {
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCard().getMonthCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
+        Page.fieldCvC.setValue("58");
+        Page.buttonNext.click();
+        Page.invalidFormatFieldCvC.shouldBe(visible).shouldBe(visible).shouldHave(text("Неверный формат"));
+    }
+
+    @Test
+    public void shouldNotSendFormWithFieldCardEmpty() {
         Page.fieldMonth.setValue(DataHelper.getValidRegisteredCard().getMonthCard());
         Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
         Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
@@ -210,7 +319,7 @@ public class SendForm {
     }
 
     @Test
-    public void shouldNotSendFormBuyTourOnCardWithFieldMonthEmpty() {
+    public void shouldNotSendFormWithFieldMonthEmpty() {
         Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
         Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
         Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
@@ -220,7 +329,7 @@ public class SendForm {
     }
 
     @Test
-    public void shouldNotSendFormBuyTourOnCardWithFieldYearEmpty() {
+    public void shouldNotSendFormWithFieldYearEmpty() {
         Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
         Page.fieldMonth.setValue(DataHelper.getValidRegisteredCard().getMonthCard());
         Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
@@ -230,7 +339,7 @@ public class SendForm {
     }
 
     @Test
-    public void shouldNotSendFormBuyTourOnCardWithFieldCardHolderEmpty() {
+    public void shouldNotSendFormBuyTourWithFieldCardHolderEmpty() {
         Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
         Page.fieldMonth.setValue(DataHelper.getValidRegisteredCard().getMonthCard());
         Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
@@ -240,7 +349,7 @@ public class SendForm {
     }
 
     @Test
-    public void shouldNotSendFormBuyTourOnCardWithFieldCvCEmpty() {
+    public void shouldNotSendFormWithFieldCvCEmpty() {
         Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
         Page.fieldMonth.setValue(DataHelper.getValidRegisteredCard().getMonthCard());
         Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());

@@ -1,4 +1,4 @@
-package ru.netology.validationFieldTest;
+package ru.netology.validationFieldPurchaseByCard;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -31,9 +31,9 @@ public class ValidationFieldNumberCardTest {
 
     @Test
     public void shouldEnterNumbersInFieldCard() {
-        Page.fieldCardNumber.setValue("1234");
+        Page.fieldCardNumber.setValue("0123456789");
         String actualContentsField = Page.fieldCardNumber.getValue();
-        assertEquals("1234", actualContentsField);
+        assertEquals("0123 4567 89", actualContentsField);
     }
 
     @Test
