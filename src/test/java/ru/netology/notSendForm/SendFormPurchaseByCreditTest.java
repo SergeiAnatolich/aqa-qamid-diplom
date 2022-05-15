@@ -59,10 +59,10 @@ public class SendFormPurchaseByCreditTest {
     @Test
     public void shouldNotSendFormWithInvalidCard() {
         Page.fieldCardNumber.setValue(DataHelper.getInvalidCard().getNumberCard());
-        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCardForCredit().getMonthCard());
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredCardForCredit().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCardForCredit().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCardForCredit().getCvcCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonthCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendNotVisible();
         Page.checkFieldCardNumber();
@@ -71,10 +71,10 @@ public class SendFormPurchaseByCreditTest {
     @Test
     public void shouldNotSendFormWithOneDigitInFieldCard() {
         Page.fieldCardNumber.setValue(DataHelper.getOneDigit());
-        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCardForCredit().getMonthCard());
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredCardForCredit().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCardForCredit().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCardForCredit().getCvcCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonthCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendNotVisible();
         Page.checkFieldCardNumber();
@@ -83,10 +83,10 @@ public class SendFormPurchaseByCreditTest {
     @Test
     public void shouldNotSendFormTourWith15DigitsInFieldCard() {
         Page.fieldCardNumber.setValue(DataHelper.get15Digits());
-        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCardForCredit().getMonthCard());
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredCardForCredit().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCardForCredit().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCardForCredit().getCvcCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonthCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendNotVisible();
         Page.checkFieldCardNumber();
@@ -94,11 +94,11 @@ public class SendFormPurchaseByCreditTest {
 
     @Test
     public void shouldNotSendFormWithOneDigitInFieldMonth() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCardForCredit().getNumberCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
         Page.fieldMonth.setValue(DataHelper.getOneDigit());
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredCardForCredit().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCardForCredit().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCardForCredit().getCvcCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendNotVisible();
         Page.checkFieldMonthFormat();
@@ -106,11 +106,11 @@ public class SendFormPurchaseByCreditTest {
 
     @Test
     public void shouldNotSendFormWithMonth00() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCardForCredit().getNumberCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
         Page.fieldMonth.setValue("00");
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredCardForCredit().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCardForCredit().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCardForCredit().getCvcCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendNotVisible();
         Page.checkFieldMonthInvalidPeriod();
@@ -118,11 +118,11 @@ public class SendFormPurchaseByCreditTest {
 
     @Test
     public void shouldNotSendFormWithMonth13() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCardForCredit().getNumberCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
         Page.fieldMonth.setValue("13");
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredCardForCredit().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCardForCredit().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCardForCredit().getCvcCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendNotVisible();
         Page.checkFieldMonthInvalidPeriod();
@@ -130,11 +130,11 @@ public class SendFormPurchaseByCreditTest {
 
     @Test
     public void shouldNotSendFormWithDateLessCurrentBy1Month() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCardForCredit().getNumberCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
         Page.fieldMonth.setValue(DataHelper.getMonth(-1));
         Page.fieldYear.setValue(DataHelper.getActualYearWithChangeMonth(-1, 0));
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCardForCredit().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCardForCredit().getCvcCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendNotVisible();
         Page.checkFieldMonthExpiredPeriod();
@@ -142,11 +142,11 @@ public class SendFormPurchaseByCreditTest {
 
     @Test
     public void shouldNotSendFormWithDateMoreCurrentBy1MonthAnd5Years() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCardForCredit().getNumberCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
         Page.fieldMonth.setValue(DataHelper.getMonth(1));
         Page.fieldYear.setValue(DataHelper.getActualYearWithChangeMonth(1, 5));
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCardForCredit().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCardForCredit().getCvcCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendNotVisible();
         Page.checkFieldMonthInvalidPeriod();
@@ -154,11 +154,11 @@ public class SendFormPurchaseByCreditTest {
 
     @Test
     public void shouldNotSendFormWithYearMoreCurrentBy6() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCardForCredit().getNumberCard());
-        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCardForCredit().getMonthCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonthCard());
         Page.fieldYear.setValue(DataHelper.getYear(6));
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCardForCredit().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCardForCredit().getCvcCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendNotVisible();
         Page.checkFieldMonthInvalidPeriod();
@@ -166,11 +166,11 @@ public class SendFormPurchaseByCreditTest {
 
     @Test
     public void shouldNotSendFormWithInvalidCardHolder() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCardForCredit().getNumberCard());
-        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCardForCredit().getMonthCard());
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredCardForCredit().getYearCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonthCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
         Page.fieldCardHolder.setValue(DataHelper.getInvalidCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCardForCredit().getCvcCard());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendNotVisible();
         Page.checkFieldCardHolderFormat();
@@ -178,10 +178,10 @@ public class SendFormPurchaseByCreditTest {
 
     @Test
     public void shouldNotSendFormWithOneDigitInFieldCvC() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCardForCredit().getNumberCard());
-        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCardForCredit().getMonthCard());
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredCardForCredit().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCardForCredit().getCardHolder());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonthCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
         Page.fieldCvC.setValue(DataHelper.getOneDigit());
         Page.buttonNext.click();
         Page.checkButtonSendNotVisible();
@@ -190,10 +190,10 @@ public class SendFormPurchaseByCreditTest {
 
     @Test
     public void shouldNotSendFormWithTwoDigitsInFieldCvC() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCardForCredit().getNumberCard());
-        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCardForCredit().getMonthCard());
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredCardForCredit().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCardForCredit().getCardHolder());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonthCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
         Page.fieldCvC.setValue(DataHelper.getTwoDigits());
         Page.buttonNext.click();
         Page.checkButtonSendNotVisible();
@@ -202,10 +202,10 @@ public class SendFormPurchaseByCreditTest {
 
     @Test
     public void shouldNotSendFormWithFieldCardEmpty() {
-        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCardForCredit().getMonthCard());
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredCardForCredit().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCardForCredit().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCardForCredit().getCvcCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonthCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendNotVisible();
         Page.checkFieldCardNumber();
@@ -213,10 +213,10 @@ public class SendFormPurchaseByCreditTest {
 
     @Test
     public void shouldNotSendFormWithFieldMonthEmpty() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCardForCredit().getNumberCard());
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredCardForCredit().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCardForCredit().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCardForCredit().getCvcCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendNotVisible();
         Page.checkFieldMonthFormat();
@@ -224,10 +224,10 @@ public class SendFormPurchaseByCreditTest {
 
     @Test
     public void shouldNotSendFormWithFieldYearEmpty() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCardForCredit().getNumberCard());
-        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCardForCredit().getMonthCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCardForCredit().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCardForCredit().getCvcCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonthCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendNotVisible();
         Page.checkFieldYear();
@@ -235,10 +235,10 @@ public class SendFormPurchaseByCreditTest {
 
     @Test
     public void shouldNotSendFormBuyTourWithFieldCardHolderEmpty() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCardForCredit().getNumberCard());
-        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCardForCredit().getMonthCard());
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredCardForCredit().getYearCard());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCardForCredit().getCvcCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonthCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendNotVisible();
         Page.checkFieldCardHolderEmpty();
@@ -246,10 +246,10 @@ public class SendFormPurchaseByCreditTest {
 
     @Test
     public void shouldNotSendFormWithFieldCvCEmpty() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCardForCredit().getNumberCard());
-        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCardForCredit().getMonthCard());
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredCardForCredit().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCardForCredit().getCardHolder());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonthCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
         Page.buttonNext.click();
         Page.checkButtonSendNotVisible();
         Page.checkFieldCvC();

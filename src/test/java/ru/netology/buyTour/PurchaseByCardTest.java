@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
+import ru.netology.data.Database;
 import ru.netology.data.Page;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -31,14 +32,15 @@ public class PurchaseByCardTest {
 
     @Test
     public void shouldSuccessfullyBuyTourOnRegisteredCard() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
-        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCard().getMonthCard());
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonthCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
+        Database.checkSuccessfullyBuyTourOnCard();
     }
 
     @Test
@@ -49,103 +51,111 @@ public class PurchaseByCardTest {
         Page.fieldCardHolder.setValue(DataHelper.getValidUnregisteredCard().getCardHolder());
         Page.fieldCvC.setValue(DataHelper.getValidUnregisteredCard().getCvcCard());
         Page.buttonNext.click();
-        Page.checkButtonSendNotVisible();
+        Page.checkButtonSendVisible();
         Page.checkNotificationTitleError();
     }
 
     @Test
     public void shouldBuyTourWithMonth01() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
         Page.fieldMonth.setValue("01");
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
+        Database.checkSuccessfullyBuyTourOnCard();
     }
 
     @Test
     public void shouldBuyTourWithMonth02() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
         Page.fieldMonth.setValue("02");
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
+        Database.checkSuccessfullyBuyTourOnCard();
     }
 
     @Test
     public void shouldBuyTourWithMonth11() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
         Page.fieldMonth.setValue("11");
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
+        Database.checkSuccessfullyBuyTourOnCard();
     }
 
     @Test
     public void shouldBuyTourWithMonth12() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
         Page.fieldMonth.setValue("12");
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredCard().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
+        Database.checkSuccessfullyBuyTourOnCard();
     }
 
     @Test
     public void shouldBuyTourWithMonthCurrentAndYearCurrent() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
         Page.fieldMonth.setValue(DataHelper.getMonth(0));
         Page.fieldYear.setValue(DataHelper.getYear(0));
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
+        Database.checkSuccessfullyBuyTourOnCard();
     }
 
     @Test
     public void shouldBuyTourWithYearMoreCurrentBy1() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
-        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCard().getMonthCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonthCard());
         Page.fieldYear.setValue(DataHelper.getYear(1));
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
+        Database.checkSuccessfullyBuyTourOnCard();
     }
 
     @Test
     public void shouldBuyTourWithYearMoreCurrentBy4() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
-        Page.fieldMonth.setValue(DataHelper.getValidRegisteredCard().getMonthCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonthCard());
         Page.fieldYear.setValue(DataHelper.getYear(4));
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
+        Database.checkSuccessfullyBuyTourOnCard();
     }
 
     @Test
     public void shouldBuyTourWithMonthCurrentAndYearMoreCurrentBy5() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredCard().getNumberCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
         Page.fieldMonth.setValue(DataHelper.getMonth(0));
         Page.fieldYear.setValue(DataHelper.getYear(5));
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredCard().getCvcCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
+        Database.checkSuccessfullyBuyTourOnCard();
     }
 }

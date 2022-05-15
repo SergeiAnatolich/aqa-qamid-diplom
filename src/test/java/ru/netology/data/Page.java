@@ -72,13 +72,13 @@ public class Page {
     }
 
     public void checkNotificationTitleOk() {
-        notificationTitleOk.should(appear, Duration.ofSeconds(15));
+        notificationTitleOk.should(appear, Duration.ofSeconds(20));
         notificationTitleOk.shouldBe(visible).shouldHave(text("Успешно"));
         notificationContentOk.shouldBe(visible).shouldHave(text("Операция одобрена Банком."));
     }
 
     public void checkNotificationTitleError() {
-        notificationTitleError.should(appear, Duration.ofSeconds(15));
+        notificationTitleError.should(appear, Duration.ofSeconds(20));
         notificationTitleError.shouldBe(visible).shouldHave(text("Ошибка"));
         notificationContentError.shouldBe(visible).shouldHave(text("Ошибка! Банк отказал в проведении операции."));
     }

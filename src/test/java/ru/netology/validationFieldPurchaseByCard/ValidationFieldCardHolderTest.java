@@ -69,7 +69,7 @@ public class ValidationFieldCardHolderTest {
     }
 
     @Test
-    public void shouldNotEnterNumbersInFieldCardHolder() {
+    public void shouldNotEnterDigitsInFieldCardHolder() {
         Page.fieldCardHolder.setValue(DataHelper.getThreeDigits());
         String actualContentsField = Page.fieldCardHolder.getValue();
         assertEquals("", actualContentsField);

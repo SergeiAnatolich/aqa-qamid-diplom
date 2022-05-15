@@ -31,7 +31,7 @@ public class ValidationFieldMonthTest {
     }
 
     @Test
-    public void shouldEnterNumbersInFieldMonth() {
+    public void shouldEnterDigitsInFieldMonth() {
         String twoDigits = DataHelper.getTwoDigits();
         Page.fieldMonth.setValue(twoDigits);
         String actualContentsField = Page.fieldMonth.getValue();
@@ -39,7 +39,7 @@ public class ValidationFieldMonthTest {
     }
 
     @Test
-    public void shouldNotEnterMore2NumbersInFieldMonth() {
+    public void shouldNotEnterMore2DigitsInFieldMonth() {
         String threeDigits = DataHelper.getThreeDigits();
         Page.fieldMonth.setValue(threeDigits);
         String actualContentsField = Page.fieldMonth.getValue();

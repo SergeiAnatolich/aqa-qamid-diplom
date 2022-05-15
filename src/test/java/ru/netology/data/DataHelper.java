@@ -12,7 +12,7 @@ public class DataHelper {
     private static final Faker fakerEn = new Faker(new Locale("en"));
     private static final Faker fakerRu = new Faker(new Locale("ru"));
 
-    public static Card getValidRegisteredCard() {
+    public static Card getValidRegisteredApprovedCard() {
         return new Card(
                 "1111222233334444",
                 getMonth(fakerEn.number().numberBetween(1, 12)),
@@ -22,7 +22,7 @@ public class DataHelper {
         );
     }
 
-    public static Card getValidRegisteredCardForCredit() {
+    public static Card getValidRegisteredDeclinedCard() {
         return new Card(
                 "5555666677778888",
                 getMonth(fakerEn.number().numberBetween(1, 12)),

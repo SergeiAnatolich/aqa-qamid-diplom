@@ -7,10 +7,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 @UtilityClass
 public class Database {
 
-    public Connection connection() throws SQLException {
+    private Connection connection() throws SQLException {
         return DriverManager.getConnection("jdbc:mysql://localhost:3306/travel", "sergei", "password");
     }
 
@@ -89,5 +92,19 @@ public class Database {
                 return rs.getString("transaction_id");
             }
         }
+    }
+
+    public void checkSuccessfullyBuyTourOnCard() {
+        assertEquals("4500000", getAmount());
+        assertEquals("APPROVED", getPaymentStatus());
+        assertEquals(getTransactionId(), getPaymentId());
+        assertNull(getCreditId());
+    }
+
+    public void checkDeclinedBuyTourOnCard() {
+        assertEquals("4500000", getAmount());
+        assertEquals("DECLINED", getPaymentStatus());
+        assertEquals(getTransactionId(), getPaymentId());
+        assertNull(getCreditId());
     }
 }
