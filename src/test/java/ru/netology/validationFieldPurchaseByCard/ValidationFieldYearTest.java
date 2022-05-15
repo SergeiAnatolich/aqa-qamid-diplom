@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.netology.data.DataHelper;
 import ru.netology.data.Page;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -30,29 +31,31 @@ public class ValidationFieldYearTest {
     }
 
     @Test
-    public void shouldEnterNumbersInFieldYear() {
-        Page.fieldYear.setValue("24");
+    public void shouldEnterDigitsInFieldYear() {
+        String twoDigits = DataHelper.getTwoDigits();
+        Page.fieldYear.setValue(twoDigits);
         String actualContentsField = Page.fieldYear.getValue();
-        assertEquals("24", actualContentsField);
+        assertEquals(twoDigits, actualContentsField);
     }
 
     @Test
-    public void shouldNotEnterMore2NumbersInFieldYear() {
-        Page.fieldYear.setValue("123");
+    public void shouldNotEnterMore2DigitsInFieldYear() {
+        String threeDigits = DataHelper.getThreeDigits();
+        Page.fieldYear.setValue(threeDigits);
         String actualContentsField = Page.fieldYear.getValue();
-        assertEquals("12", actualContentsField);
+        assertEquals(threeDigits.substring(0, 2), actualContentsField);
     }
 
     @Test
     public void shouldNotEnterLettersLatinInFieldYear() {
-        Page.fieldYear.setValue("ya");
+        Page.fieldYear.setValue(DataHelper.getLatinFirstName().substring(0, 2));
         String actualContentsField = Page.fieldYear.getValue();
         assertEquals("", actualContentsField);
     }
 
     @Test
     public void shouldNotEnterLettersCyrillicInFieldYear() {
-        Page.fieldYear.setValue("го");
+        Page.fieldYear.setValue(DataHelper.getCyrillicFirstName().substring(0, 2));
         String actualContentsField = Page.fieldYear.getValue();
         assertEquals("", actualContentsField);
     }

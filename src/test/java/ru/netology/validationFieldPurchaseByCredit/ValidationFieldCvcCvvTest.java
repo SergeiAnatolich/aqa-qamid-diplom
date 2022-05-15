@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.netology.data.DataHelper;
 import ru.netology.data.Page;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -30,29 +31,31 @@ public class ValidationFieldCvcCvvTest {
     }
 
     @Test
-    public void shouldEnterNumbersInFieldCvC() {
-        Page.fieldCvC.setValue("123");
+    public void shouldEnterDigitsInFieldCvC() {
+        String digits = DataHelper.getThreeDigits();
+        Page.fieldCvC.setValue(digits);
         String actualContentsField = Page.fieldCvC.getValue();
-        assertEquals("123", actualContentsField);
+        assertEquals(digits, actualContentsField);
     }
 
     @Test
-    public void shouldNotEnterMore3NumbersInFieldCvC() {
-        Page.fieldCvC.setValue("1234");
+    public void shouldNotEnterMore3DigitsInFieldCvC() {
+        String digits = DataHelper.getFourDigits();
+        Page.fieldCvC.setValue(digits);
         String actualContentsField = Page.fieldCvC.getValue();
-        assertEquals("123", actualContentsField);
+        assertEquals(digits.substring(0, 3), actualContentsField);
     }
 
     @Test
     public void shouldNotEnterLettersLatinInFieldCvC() {
-        Page.fieldCvC.setValue("cv");
+        Page.fieldCvC.setValue(DataHelper.getLatinFirstName().substring(0, 2));
         String actualContentsField = Page.fieldCvC.getValue();
         assertEquals("", actualContentsField);
     }
 
     @Test
     public void shouldNotEnterLettersCyrillicInFieldCvC() {
-        Page.fieldCvC.setValue("ко");
+        Page.fieldCvC.setValue(DataHelper.getCyrillicFirstName().substring(0, 2));
         String actualContentsField = Page.fieldCvC.getValue();
         assertEquals("", actualContentsField);
     }

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.netology.data.DataHelper;
 import ru.netology.data.Page;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -31,28 +32,31 @@ public class ValidationFieldCardHolderTest {
 
     @Test
     public void shouldEnterLettersLatinInFieldCardHolder() {
-        Page.fieldCardHolder.setValue("ivan");
+        String latinName = DataHelper.getLatinFirstName();
+        Page.fieldCardHolder.setValue(latinName);
         String actualContentsField = Page.fieldCardHolder.getValue();
-        assertEquals("ivan", actualContentsField);
+        assertEquals(latinName, actualContentsField);
     }
 
     @Test
     public void shouldEnterLettersLatinInFieldCardHolderWithSpace() {
-        Page.fieldCardHolder.setValue("ivan ivanov");
+        String latinName = DataHelper.getLatinFirstName() + " " + DataHelper.getLatinLastName();
+        Page.fieldCardHolder.setValue(latinName);
         String actualContentsField = Page.fieldCardHolder.getValue();
-        assertEquals("ivan ivanov", actualContentsField);
+        assertEquals(latinName, actualContentsField);
     }
 
     @Test
     public void shouldEnterLettersLatinInFieldCardHolderWithHyphen() {
-        Page.fieldCardHolder.setValue("anna-maria ivanova-sidorova");
+        String latinName = DataHelper.getLatinFirstName() + "-" + DataHelper.getLatinFirstName();
+        Page.fieldCardHolder.setValue(latinName);
         String actualContentsField = Page.fieldCardHolder.getValue();
-        assertEquals("anna-maria ivanova-sidorova", actualContentsField);
+        assertEquals(latinName, actualContentsField);
     }
 
     @Test
     public void shouldNotEnterLettersCyrillicInFieldCardHolder() {
-        Page.fieldCardHolder.setValue("иван иванов");
+        Page.fieldCardHolder.setValue(DataHelper.getCyrillicFirstName());
         String actualContentsField = Page.fieldCardHolder.getValue();
         assertEquals("", actualContentsField);
     }
@@ -66,7 +70,7 @@ public class ValidationFieldCardHolderTest {
 
     @Test
     public void shouldNotEnterNumbersInFieldCardHolder() {
-        Page.fieldCardHolder.setValue("123");
+        Page.fieldCardHolder.setValue(DataHelper.getThreeDigits());
         String actualContentsField = Page.fieldCardHolder.getValue();
         assertEquals("", actualContentsField);
     }
@@ -80,8 +84,9 @@ public class ValidationFieldCardHolderTest {
 
     @Test
     public void shouldNotEnterMore27LettersLatinInFieldCardHolder() {
-        Page.fieldCardHolder.setValue("anna-mariya ivanova-sidorova");
+        String latinLetters = DataHelper.getLatin30Letters();
+        Page.fieldCardHolder.setValue(latinLetters);
         String actualContentsField = Page.fieldCardHolder.getValue();
-        assertEquals("anna-mariya ivanova-sidorov", actualContentsField);
+        assertEquals(latinLetters.substring(0, 27), actualContentsField);
     }
 }

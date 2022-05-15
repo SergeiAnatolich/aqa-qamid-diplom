@@ -1,9 +1,10 @@
 ## Для запуска автотестов предварительно должно быть установлено:
 - IntelliJ IDEA
-- Docker
+- IntelliJ Lombok plugin
+- Docker Desktop
 - Google Chrome
 
-## Шаги запуста автотестов и просмотр отчета
+## Шаги запуска автотестов и просмотр отчета
 ### 1. Запустить контейнер командой
 docker-compose up
 
@@ -16,5 +17,6 @@ java -jar artifacts/aqa-shop.jar
 ### 4. Запустить просмотр отчета Allure командой
 ./gradlew allureServe
 
-## Для подключение к базе в ручную использовать команду
+## Для подключение к базе вручную использовать команду
 docker-compose exec mysql mysql -u sergei -p travel
+password: password

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.netology.data.DataHelper;
 import ru.netology.data.Page;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -30,29 +31,38 @@ public class ValidationFieldNumberCardTest {
     }
 
     @Test
-    public void shouldEnterNumbersInFieldCard() {
-        Page.fieldCardNumber.setValue("0123456789");
+    public void shouldEnterDigitsInFieldCard() {
+        String digits = DataHelper.getFourDigits();
+        Page.fieldCardNumber.setValue(digits);
         String actualContentsField = Page.fieldCardNumber.getValue();
-        assertEquals("0123 4567 89", actualContentsField);
+        assertEquals(digits, actualContentsField);
     }
 
     @Test
-    public void shouldNotEnterMore16NumbersInFieldCard() {
-        Page.fieldCardNumber.setValue("1111 2222 3333 4444 5555");
+    public void shouldNotEnterMore16DigitsInFieldCard() {
+        String digits = DataHelper.get20Digits();
+        Page.fieldCardNumber.setValue(digits);
         String actualContentsField = Page.fieldCardNumber.getValue();
-        assertEquals("1111 2222 3333 4444", actualContentsField);
+        assertEquals(digits.substring(0, 19), actualContentsField);
     }
 
     @Test
     public void shouldNotEnterLettersLatinInFieldCard() {
-        Page.fieldCardNumber.setValue("number");
+        Page.fieldCardNumber.setValue(DataHelper.getLatinFirstName());
         String actualContentsField = Page.fieldCardNumber.getValue();
         assertEquals("", actualContentsField);
     }
 
     @Test
     public void shouldNotEnterLettersCyrillicInFieldCard() {
-        Page.fieldCardNumber.setValue("номерё");
+        Page.fieldCardNumber.setValue(DataHelper.getCyrillicFirstName());
+        String actualContentsField = Page.fieldCardNumber.getValue();
+        assertEquals("", actualContentsField);
+    }
+
+    @Test
+    public void shouldNotEnterLetterCyrillicInFieldCard() {
+        Page.fieldCardNumber.setValue("ё");
         String actualContentsField = Page.fieldCardNumber.getValue();
         assertEquals("", actualContentsField);
     }

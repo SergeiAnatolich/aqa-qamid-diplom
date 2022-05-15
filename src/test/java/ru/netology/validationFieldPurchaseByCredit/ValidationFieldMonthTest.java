@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.netology.data.DataHelper;
 import ru.netology.data.Page;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -31,28 +32,30 @@ public class ValidationFieldMonthTest {
 
     @Test
     public void shouldEnterNumbersInFieldMonth() {
-        Page.fieldMonth.setValue("01");
+        String twoDigits = DataHelper.getTwoDigits();
+        Page.fieldMonth.setValue(twoDigits);
         String actualContentsField = Page.fieldMonth.getValue();
-        assertEquals("01", actualContentsField);
+        assertEquals(twoDigits, actualContentsField);
     }
 
     @Test
     public void shouldNotEnterMore2NumbersInFieldMonth() {
-        Page.fieldMonth.setValue("123");
+        String threeDigits = DataHelper.getThreeDigits();
+        Page.fieldMonth.setValue(threeDigits);
         String actualContentsField = Page.fieldMonth.getValue();
-        assertEquals("12", actualContentsField);
+        assertEquals(threeDigits.substring(0, 2), actualContentsField);
     }
 
     @Test
     public void shouldNotEnterLettersLatinInFieldMonth() {
-        Page.fieldMonth.setValue("mo");
+        Page.fieldMonth.setValue(DataHelper.getLatinFirstName().substring(0, 2));
         String actualContentsField = Page.fieldMonth.getValue();
         assertEquals("", actualContentsField);
     }
 
     @Test
     public void shouldNotEnterLettersCyrillicInFieldMonth() {
-        Page.fieldMonth.setValue("ар");
+        Page.fieldMonth.setValue(DataHelper.getCyrillicFirstName().substring(0, 2));
         String actualContentsField = Page.fieldMonth.getValue();
         assertEquals("", actualContentsField);
     }
