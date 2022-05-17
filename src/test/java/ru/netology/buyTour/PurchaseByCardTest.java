@@ -31,7 +31,7 @@ public class PurchaseByCardTest {
     }
 
     @Test
-    public void shouldSuccessfullyBuyTourOnRegisteredCard() {
+    public void shouldSuccessfullyBuyTourOnApprovedCard() {
         Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
         Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonthCard());
         Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
@@ -44,15 +44,16 @@ public class PurchaseByCardTest {
     }
 
     @Test
-    public void shouldNotBuyTourOnCardWithUnregisteredCard() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidUnregisteredCard().getNumberCard());
-        Page.fieldMonth.setValue(DataHelper.getValidUnregisteredCard().getMonthCard());
-        Page.fieldYear.setValue(DataHelper.getValidUnregisteredCard().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidUnregisteredCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidUnregisteredCard().getCvcCard());
+    public void shouldNotBuyTourOnDeclinedCard() {
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredDeclinedCard().getNumberCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredDeclinedCard().getMonthCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredDeclinedCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredDeclinedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredDeclinedCard().getCvcCard());
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleError();
+        Database.checkDeclinedBuyTourOnCard();
     }
 
     @Test

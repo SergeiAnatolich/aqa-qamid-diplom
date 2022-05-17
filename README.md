@@ -18,5 +18,5 @@ java -jar artifacts/aqa-shop.jar
 ./gradlew allureServe
 
 ## Для подключение к базе вручную использовать команду
-docker-compose exec mysql mysql -u sergei -p travel
+docker-compose exec mysql mysql -u sergei -p travel  
 password: password

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
+import ru.netology.data.Database;
 import ru.netology.data.Page;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -30,7 +31,7 @@ public class PurchaseByCreditTest {
     }
 
     @Test
-    public void shouldSuccessfullyBuyTourOnRegisteredCard() {
+    public void shouldSuccessfullyBuyTourOnApprovedCard() {
         Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
         Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonthCard());
         Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
@@ -39,19 +40,20 @@ public class PurchaseByCreditTest {
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
-
+        Database.checkSuccessfullyBuyTourOnCredit();
     }
 
     @Test
-    public void shouldNotBuyTourOnCardWithUnregisteredCard() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidUnregisteredCard().getNumberCard());
-        Page.fieldMonth.setValue(DataHelper.getValidUnregisteredCard().getMonthCard());
-        Page.fieldYear.setValue(DataHelper.getValidUnregisteredCard().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidUnregisteredCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidUnregisteredCard().getCvcCard());
+    public void shouldNotBuyTourOnDeclinedCard() {
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredDeclinedCard().getNumberCard());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredDeclinedCard().getMonthCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredDeclinedCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredDeclinedCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredDeclinedCard().getCvcCard());
         Page.buttonNext.click();
-        Page.checkButtonSendNotVisible();
+        Page.checkButtonSendVisible();
         Page.checkNotificationTitleError();
+        Database.checkDeclinedBuyTourOnCredit();
     }
 
     @Test
@@ -64,6 +66,7 @@ public class PurchaseByCreditTest {
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
+        Database.checkSuccessfullyBuyTourOnCredit();
     }
 
     @Test
@@ -76,6 +79,7 @@ public class PurchaseByCreditTest {
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
+        Database.checkSuccessfullyBuyTourOnCredit();
     }
 
     @Test
@@ -88,6 +92,7 @@ public class PurchaseByCreditTest {
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
+        Database.checkSuccessfullyBuyTourOnCredit();
     }
 
     @Test
@@ -100,6 +105,7 @@ public class PurchaseByCreditTest {
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
+        Database.checkSuccessfullyBuyTourOnCredit();
     }
 
     @Test
@@ -112,6 +118,7 @@ public class PurchaseByCreditTest {
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
+        Database.checkSuccessfullyBuyTourOnCredit();
     }
 
     @Test
@@ -124,6 +131,7 @@ public class PurchaseByCreditTest {
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
+        Database.checkSuccessfullyBuyTourOnCredit();
     }
 
     @Test
@@ -136,6 +144,7 @@ public class PurchaseByCreditTest {
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
+        Database.checkSuccessfullyBuyTourOnCredit();
     }
 
     @Test
@@ -148,6 +157,6 @@ public class PurchaseByCreditTest {
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
+        Database.checkSuccessfullyBuyTourOnCredit();
     }
-
 }

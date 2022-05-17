@@ -1,4 +1,4 @@
-package ru.netology.notSendForm;
+package ru.netology.SendForm;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -27,6 +27,17 @@ public class SendFormPurchaseByCardTest {
     public void openBrowserAndClickButtonBuy() {
         open("http://localhost:8080/");
         Page.buttonBuy.click();
+    }
+
+    @Test
+    public void shouldSendFormWithAllValidFields() {
+        Page.fieldCardNumber.setValue(DataHelper.getValidUnregisteredCard().getNumberCard());
+        Page.fieldMonth.setValue(DataHelper.getValidUnregisteredCard().getMonthCard());
+        Page.fieldYear.setValue(DataHelper.getValidUnregisteredCard().getYearCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidUnregisteredCard().getCardHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidUnregisteredCard().getCvcCard());
+        Page.buttonNext.click();
+        Page.checkButtonSendVisible();
     }
 
     @Test

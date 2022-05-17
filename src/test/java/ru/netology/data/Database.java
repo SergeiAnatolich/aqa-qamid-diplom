@@ -7,8 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @UtilityClass
 public class Database {
@@ -29,12 +28,45 @@ public class Database {
     }
 
     @SneakyThrows
+    private String getCreatedCreditRequestEntity() {
+        var creditStatusQuery = "SELECT created FROM credit_request_entity ORDER BY created DESC;";
+        try (var statement = connection().createStatement()) {
+            try (var rs = statement.executeQuery(creditStatusQuery)) {
+                rs.next();
+                return rs.getString("created").substring(0, 19);
+            }
+        }
+    }
+
+    @SneakyThrows
     private String getBankIdBuyInCredit() {
         var creditStatusQuery = "SELECT bank_id FROM credit_request_entity ORDER BY created DESC;";
         try (var statement = connection().createStatement()) {
             try (var rs = statement.executeQuery(creditStatusQuery)) {
                 rs.next();
                 return rs.getString("bank_id");
+            }
+        }
+    }
+
+    @SneakyThrows
+    private String getIdInCredit() {
+        var creditStatusQuery = "SELECT id FROM credit_request_entity ORDER BY created DESC;";
+        try (var statement = connection().createStatement()) {
+            try (var rs = statement.executeQuery(creditStatusQuery)) {
+                rs.next();
+                return rs.getString("id");
+            }
+        }
+    }
+
+    @SneakyThrows
+    private String getCreatedOrderEntity() {
+        var creditStatusQuery = "SELECT created FROM order_entity ORDER BY created DESC;";
+        try (var statement = connection().createStatement()) {
+            try (var rs = statement.executeQuery(creditStatusQuery)) {
+                rs.next();
+                return rs.getString("created").substring(0, 19);
             }
         }
     }
@@ -73,6 +105,17 @@ public class Database {
     }
 
     @SneakyThrows
+    private String getCreatedPaymentEntity() {
+        var creditStatusQuery = "SELECT created FROM payment_entity ORDER BY created DESC;";
+        try (var statement = connection().createStatement()) {
+            try (var rs = statement.executeQuery(creditStatusQuery)) {
+                rs.next();
+                return rs.getString("created").substring(0, 19);
+            }
+        }
+    }
+
+    @SneakyThrows
     private String getPaymentStatus() {
         var creditStatusQuery = "SELECT status FROM payment_entity ORDER BY created DESC;";
         try (var statement = connection().createStatement()) {
@@ -95,16 +138,37 @@ public class Database {
     }
 
     public void checkSuccessfullyBuyTourOnCard() {
-        assertEquals("4500000", getAmount());
         assertEquals("APPROVED", getPaymentStatus());
+        assertEquals("4500000", getAmount());
+        assertEquals(getCreatedPaymentEntity(), getCreatedOrderEntity());
         assertEquals(getTransactionId(), getPaymentId());
         assertNull(getCreditId());
     }
 
     public void checkDeclinedBuyTourOnCard() {
-        assertEquals("4500000", getAmount());
         assertEquals("DECLINED", getPaymentStatus());
+        assertEquals("4500000", getAmount());
+        assertEquals(getCreatedPaymentEntity(), getCreatedOrderEntity());
         assertEquals(getTransactionId(), getPaymentId());
         assertNull(getCreditId());
+    }
+
+    public void checkSuccessfullyBuyTourOnCredit() {
+        assertEquals("APPROVED", getCreditStatus());
+        assertEquals(getBankIdBuyInCredit(), getPaymentId());
+        assertEquals(getCreatedCreditRequestEntity(), getCreatedOrderEntity());
+        assertNotNull(getCreditId());
+        assertEquals(getPaymentId(), getTransactionId());
+        assertEquals("APPROVED", getPaymentStatus());
+        assertEquals("4500000", getAmount());
+    }
+
+    public void checkDeclinedBuyTourOnCredit() {
+        assertEquals("DECLINED", getCreditStatus());
+        assertNull(getBankIdBuyInCredit());
+        assertEquals(getCreatedCreditRequestEntity(), getCreatedOrderEntity());
+        assertEquals(getIdInCredit(), getCreditId());
+        assertNull(getPaymentId());
+        assertNotEquals(getCreatedCreditRequestEntity(), getCreatedPaymentEntity());
     }
 }
