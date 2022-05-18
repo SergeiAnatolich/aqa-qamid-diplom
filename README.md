@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/uaqry9yewodvtwsm?svg=true)](https://ci.appveyor.com/project/SergeiAnatolich/aqa-qamid-diplom)
+
 ## Для запуска автотестов предварительно должно быть установлено:
 - IntelliJ IDEA
 - IntelliJ Lombok plugin
