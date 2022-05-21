@@ -13,14 +13,15 @@ import static org.junit.jupiter.api.Assertions.*;
 public class Database {
 
     private Connection connection() throws SQLException {
+
         return DriverManager.getConnection("jdbc:mysql://localhost:3306/travel", "sergei", "password");
     }
 
     @SneakyThrows
     private String getCreditStatus() {
-        var creditStatusQuery = "SELECT status FROM credit_request_entity ORDER BY created DESC;";
+        var query = "SELECT status FROM credit_request_entity ORDER BY created DESC;";
         try (var statement = connection().createStatement()) {
-            try (var rs = statement.executeQuery(creditStatusQuery)) {
+            try (var rs = statement.executeQuery(query)) {
                 rs.next();
                 return rs.getString("status");
             }
@@ -29,9 +30,9 @@ public class Database {
 
     @SneakyThrows
     private String getCreatedCreditRequestEntity() {
-        var creditStatusQuery = "SELECT created FROM credit_request_entity ORDER BY created DESC;";
+        var query = "SELECT created FROM credit_request_entity ORDER BY created DESC;";
         try (var statement = connection().createStatement()) {
-            try (var rs = statement.executeQuery(creditStatusQuery)) {
+            try (var rs = statement.executeQuery(query)) {
                 rs.next();
                 return rs.getString("created").substring(0, 19);
             }
@@ -40,9 +41,9 @@ public class Database {
 
     @SneakyThrows
     private String getBankIdBuyInCredit() {
-        var creditStatusQuery = "SELECT bank_id FROM credit_request_entity ORDER BY created DESC;";
+        var query = "SELECT bank_id FROM credit_request_entity ORDER BY created DESC;";
         try (var statement = connection().createStatement()) {
-            try (var rs = statement.executeQuery(creditStatusQuery)) {
+            try (var rs = statement.executeQuery(query)) {
                 rs.next();
                 return rs.getString("bank_id");
             }
@@ -51,9 +52,9 @@ public class Database {
 
     @SneakyThrows
     private String getIdInCredit() {
-        var creditStatusQuery = "SELECT id FROM credit_request_entity ORDER BY created DESC;";
+        var query = "SELECT id FROM credit_request_entity ORDER BY created DESC;";
         try (var statement = connection().createStatement()) {
-            try (var rs = statement.executeQuery(creditStatusQuery)) {
+            try (var rs = statement.executeQuery(query)) {
                 rs.next();
                 return rs.getString("id");
             }
@@ -62,9 +63,9 @@ public class Database {
 
     @SneakyThrows
     private String getCreatedOrderEntity() {
-        var creditStatusQuery = "SELECT created FROM order_entity ORDER BY created DESC;";
+        var query = "SELECT created FROM order_entity ORDER BY created DESC;";
         try (var statement = connection().createStatement()) {
-            try (var rs = statement.executeQuery(creditStatusQuery)) {
+            try (var rs = statement.executeQuery(query)) {
                 rs.next();
                 return rs.getString("created").substring(0, 19);
             }
@@ -73,9 +74,9 @@ public class Database {
 
     @SneakyThrows
     private String getCreditId() {
-        var creditStatusQuery = "SELECT credit_id FROM order_entity ORDER BY created DESC;";
+        var query = "SELECT credit_id FROM order_entity ORDER BY created DESC;";
         try (var statement = connection().createStatement()) {
-            try (var rs = statement.executeQuery(creditStatusQuery)) {
+            try (var rs = statement.executeQuery(query)) {
                 rs.next();
                 return rs.getString("credit_id");
             }
@@ -84,9 +85,9 @@ public class Database {
 
     @SneakyThrows
     private String getPaymentId() {
-        var creditStatusQuery = "SELECT payment_id FROM order_entity ORDER BY created DESC;";
+        var query = "SELECT payment_id FROM order_entity ORDER BY created DESC;";
         try (var statement = connection().createStatement()) {
-            try (var rs = statement.executeQuery(creditStatusQuery)) {
+            try (var rs = statement.executeQuery(query)) {
                 rs.next();
                 return rs.getString("payment_id");
             }
@@ -95,9 +96,9 @@ public class Database {
 
     @SneakyThrows
     private String getAmount() {
-        var creditStatusQuery = "SELECT amount FROM payment_entity ORDER BY created DESC;";
+        var query = "SELECT amount FROM payment_entity ORDER BY created DESC;";
         try (var statement = connection().createStatement()) {
-            try (var rs = statement.executeQuery(creditStatusQuery)) {
+            try (var rs = statement.executeQuery(query)) {
                 rs.next();
                 return rs.getString("amount");
             }
@@ -106,9 +107,9 @@ public class Database {
 
     @SneakyThrows
     private String getCreatedPaymentEntity() {
-        var creditStatusQuery = "SELECT created FROM payment_entity ORDER BY created DESC;";
+        var query = "SELECT created FROM payment_entity ORDER BY created DESC;";
         try (var statement = connection().createStatement()) {
-            try (var rs = statement.executeQuery(creditStatusQuery)) {
+            try (var rs = statement.executeQuery(query)) {
                 rs.next();
                 return rs.getString("created").substring(0, 19);
             }
@@ -117,9 +118,9 @@ public class Database {
 
     @SneakyThrows
     private String getPaymentStatus() {
-        var creditStatusQuery = "SELECT status FROM payment_entity ORDER BY created DESC;";
+        var query = "SELECT status FROM payment_entity ORDER BY created DESC;";
         try (var statement = connection().createStatement()) {
-            try (var rs = statement.executeQuery(creditStatusQuery)) {
+            try (var rs = statement.executeQuery(query)) {
                 rs.next();
                 return rs.getString("status");
             }
@@ -128,9 +129,9 @@ public class Database {
 
     @SneakyThrows
     private String getTransactionId() {
-        var creditStatusQuery = "SELECT transaction_id FROM payment_entity ORDER BY created DESC;";
+        var query = "SELECT transaction_id FROM payment_entity ORDER BY created DESC;";
         try (var statement = connection().createStatement()) {
-            try (var rs = statement.executeQuery(creditStatusQuery)) {
+            try (var rs = statement.executeQuery(query)) {
                 rs.next();
                 return rs.getString("transaction_id");
             }

@@ -32,11 +32,11 @@ public class PurchaseByCreditTest {
 
     @Test
     public void shouldSuccessfullyBuyTourOnApprovedCard() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
-        Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonthCard());
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumber());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonth());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYear());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvc());
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
@@ -45,11 +45,11 @@ public class PurchaseByCreditTest {
 
     @Test
     public void shouldNotBuyTourOnDeclinedCard() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredDeclinedCard().getNumberCard());
-        Page.fieldMonth.setValue(DataHelper.getValidRegisteredDeclinedCard().getMonthCard());
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredDeclinedCard().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredDeclinedCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredDeclinedCard().getCvcCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredDeclinedCard().getNumber());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredDeclinedCard().getMonth());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredDeclinedCard().getYear());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredDeclinedCard().getHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredDeclinedCard().getCvc());
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleError();
@@ -58,11 +58,11 @@ public class PurchaseByCreditTest {
 
     @Test
     public void shouldBuyTourWithMonth01() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumber());
         Page.fieldMonth.setValue("01");
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYear());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvc());
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
@@ -71,11 +71,11 @@ public class PurchaseByCreditTest {
 
     @Test
     public void shouldBuyTourWithMonth02() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumber());
         Page.fieldMonth.setValue("02");
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYear());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvc());
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
@@ -84,11 +84,11 @@ public class PurchaseByCreditTest {
 
     @Test
     public void shouldBuyTourWithMonth11() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumber());
         Page.fieldMonth.setValue("11");
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYear());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvc());
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
@@ -97,11 +97,11 @@ public class PurchaseByCreditTest {
 
     @Test
     public void shouldBuyTourWithMonth12() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumber());
         Page.fieldMonth.setValue("12");
-        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYearCard());
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
+        Page.fieldYear.setValue(DataHelper.getValidRegisteredApprovedCard().getYear());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvc());
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
@@ -110,11 +110,11 @@ public class PurchaseByCreditTest {
 
     @Test
     public void shouldBuyTourWithMonthCurrentAndYearCurrent() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumber());
         Page.fieldMonth.setValue(DataHelper.getMonth(0));
         Page.fieldYear.setValue(DataHelper.getYear(0));
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvc());
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
@@ -123,11 +123,11 @@ public class PurchaseByCreditTest {
 
     @Test
     public void shouldBuyTourWithYearMoreCurrentBy1() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
-        Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonthCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumber());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonth());
         Page.fieldYear.setValue(DataHelper.getYear(1));
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvc());
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
@@ -136,11 +136,11 @@ public class PurchaseByCreditTest {
 
     @Test
     public void shouldBuyTourWithYearMoreCurrentBy4() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
-        Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonthCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumber());
+        Page.fieldMonth.setValue(DataHelper.getValidRegisteredApprovedCard().getMonth());
         Page.fieldYear.setValue(DataHelper.getYear(4));
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvc());
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();
@@ -149,11 +149,11 @@ public class PurchaseByCreditTest {
 
     @Test
     public void shouldBuyTourWithMonthCurrentAndYearMoreCurrentBy5() {
-        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumberCard());
+        Page.fieldCardNumber.setValue(DataHelper.getValidRegisteredApprovedCard().getNumber());
         Page.fieldMonth.setValue(DataHelper.getMonth(0));
         Page.fieldYear.setValue(DataHelper.getYear(5));
-        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getCardHolder());
-        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvcCard());
+        Page.fieldCardHolder.setValue(DataHelper.getValidRegisteredApprovedCard().getHolder());
+        Page.fieldCvC.setValue(DataHelper.getValidRegisteredApprovedCard().getCvc());
         Page.buttonNext.click();
         Page.checkButtonSendVisible();
         Page.checkNotificationTitleOk();

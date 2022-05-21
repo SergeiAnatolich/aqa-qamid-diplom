@@ -14,7 +14,7 @@ public class DataHelper {
 
     public static Card getValidRegisteredApprovedCard() {
         return new Card(
-                "1111222233334444",
+                "1111 2222 3333 4444",
                 getMonth(fakerEn.number().numberBetween(1, 12)),
                 getYear(fakerEn.number().numberBetween(1, 4)),
                 fakerEn.name().firstName() + " " + fakerEn.name().lastName(),
@@ -24,7 +24,7 @@ public class DataHelper {
 
     public static Card getValidRegisteredDeclinedCard() {
         return new Card(
-                "5555666677778888",
+                "5555 6666 7777 8888",
                 getMonth(fakerEn.number().numberBetween(1, 12)),
                 getYear(fakerEn.number().numberBetween(1, 4)),
                 fakerEn.name().firstName() + " " + fakerEn.name().lastName(),
@@ -34,7 +34,10 @@ public class DataHelper {
 
     public static Card getValidUnregisteredCard() {
         return new Card(
-                fakerEn.number().digits(16),
+         fakerEn.number().digits(4) + " " +
+                fakerEn.number().digits(4) + " " +
+                fakerEn.number().digits(4) + " " +
+                fakerEn.number().digits(4),
                 getMonth(fakerEn.number().numberBetween(1, 12)),
                 getYear(fakerEn.number().numberBetween(1, 4)),
                 fakerEn.name().firstName() + " " + fakerEn.name().lastName(),
@@ -97,7 +100,10 @@ public class DataHelper {
     }
 
     public static String get15Digits() {
-        return fakerEn.number().digits(15);
+        return fakerEn.number().digits(4) + " " +
+                fakerEn.number().digits(4) + " " +
+                fakerEn.number().digits(4) + " " +
+                fakerEn.number().digits(3);
     }
 
     public static String get20Digits() {
@@ -110,10 +116,10 @@ public class DataHelper {
 
     @Value
     public static class Card {
-        String numberCard;
-        String monthCard;
-        String yearCard;
-        String cardHolder;
-        String cvcCard;
+        String number;
+        String month;
+        String year;
+        String holder;
+        String cvc;
     }
 }
