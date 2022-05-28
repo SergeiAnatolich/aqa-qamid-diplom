@@ -12,9 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 @UtilityClass
 public class Database {
 
-    private Connection connection() throws SQLException {
+    public static String url = System.getProperty("url");
+    public static String user = System.getProperty("user");
+    public static String passwd = System.getProperty("passwd");
 
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/travel", "sergei", "password");
+    private Connection connection() throws SQLException {
+        return DriverManager.getConnection(url, user, passwd);
     }
 
     @SneakyThrows

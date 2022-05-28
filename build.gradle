@@ -33,9 +33,15 @@ dependencies {
     testImplementation 'io.qameta.allure:allure-selenide:2.17.3'
     testImplementation 'io.rest-assured:rest-assured:5.0.1'
     testImplementation 'com.google.code.gson:gson:2.9.0'
+    testImplementation 'org.postgresql:postgresql:42.3.5'
+
 }
 
 test {
     useJUnitPlatform()
     systemProperty 'selenide.headless', System.getProperty('selenide.headless')
+    systemProperty 'url', System.getProperty('url', 'jdbc:mysql://localhost:3306/travel')
+//    systemProperty 'url', System.getProperty('url', 'jdbc:postgresql://localhost:5432/travel')
+    systemProperty 'user', System.getProperty('user', 'sergei')
+    systemProperty 'passwd', System.getProperty('passwd', 'password')
 }

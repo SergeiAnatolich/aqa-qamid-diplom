@@ -9,9 +9,6 @@ import ru.netology.data.Api;
 import ru.netology.data.DataHelper;
 import ru.netology.data.Database;
 
-import static com.codeborne.selenide.Selenide.open;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 public class ApiCardTest {
 
     @BeforeAll
